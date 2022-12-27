@@ -40,4 +40,4 @@ chown -R perforce:perforce $P4ROOT
 chown -R perforce:perforce /dbs
 cd /dbs
 p4dctl start $SERVER_ID
-tail -F $P4ROOT/logs/log
+tail -F -n 100 $P4ROOT/logs/log
