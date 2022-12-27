@@ -1,6 +1,10 @@
 # perforce-mini
 A minimal Docker image to run Perforce without the hassle. This image will automatically configure the Perforce server, so it will run without any manual steps required. I have very little experience with Perforce and while this image works for me it may not be suitable for a professional environment. I have set it up to be simple and relatively secure, but please keep in mind that this is a hobby project. If you find any issues or have any suggestions please open an issue or a pull request.
 
+The modifications to the original project include supporting user groups that are not unique/already exist, and to support setting up Unicode and case insensitivity.  The launcher script was also modified to include a root directory for launching p4d in as there have been some reports that p4d creates files in the CWD it was launched from.
+
+With the change to groupmod, this package now works correctly on Synology NAS devices.  [@pbrubaker](https://github.com/pbrubaker)
+
 
 ## Running with `docker-compose`
 
@@ -23,6 +27,9 @@ services:
       # folder and mount it here. The container will automatically configure Perforce to use this
       # folder.
       - ./perforce-data:/perforce-data
+      # The root directory where p4d is launched from.  If it creates any files in it's CWD
+      # they will be in this folder.
+      - ./dbs:/dbs
     environment:
       # The port on which the Perforce server will listen. This is the default port.
       - P4PORT=1666
@@ -42,6 +49,10 @@ services:
       # the data directory on the host system.
       - PERFORCE_UID=1000
       - PERFORCE_GID=1000
+      # Enable Unicode support on the server.  Set to '1' or 'true to enable.
+      - $UNICODE=false
+      # Enable case insensitivity support on the server.  Set to '1' or 'true to enable.
+      - $CASE_INSENSITIVE=true
     ports:
       # The port to expose. Make sure it matches the P4PORT environment variable.
       - 1666:1666
@@ -64,5 +75,6 @@ On first start the Perforce initialization script will automatically generate an
 
 ## Acknowledgements
 
+- Big thanks to [@derkork](https://github.com/derkork) for creating this, and for combining the work of the folks below.  Most of this README was authored by [@derkork](https://github.com/derkork), I've just edited where necessary to document my changes. [@pbrubaker](https://github.com/pbrubaker)
 - Thanks to Ari for making this [tutorial](https://aricodes.net/posts/perforce-server-with-docker/) which I used as a starting point for this image.
 - Thanks to Polymoon Games for making this [tutorial](https://polymoon.net/blog/how-to-renew-perforce-ssl-certificate/) on how to refresh the SSL certificates for Perforce, which I used as a starting point to implement automatic certificate renewal.
