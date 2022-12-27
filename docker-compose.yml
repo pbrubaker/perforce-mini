@@ -14,5 +14,7 @@ services:
       - MASTER_USER=perforce-master
       - PERFORCE_UID=1000
       - PERFORCE_GID=1000
+      - CASE_INSENSITIVE=true
+      - UNICODE=false
     ports:
       - 1666:1666
