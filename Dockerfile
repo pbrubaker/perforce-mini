@@ -24,7 +24,7 @@ RUN mkdir -p /opt/perforce/
 RUN cp /etc/perforce/p4dctl.conf.d/p4d.template /opt/perforce/p4d.template
 
 # Add our start script
-ADD perforce.sh /opt/perforce/perforce.sh
+COPY ./perforce.sh /opt/perforce/perforce.sh
 RUN chmod a+x /opt/perforce/perforce.sh
 
 CMD /opt/perforce/perforce.sh
