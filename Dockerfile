@@ -27,5 +27,5 @@ RUN cp /etc/perforce/p4dctl.conf.d/p4d.template /opt/perforce/p4d.template
 COPY ./perforce.sh /opt/perforce/perforce.sh
 RUN chmod a+x /opt/perforce/perforce.sh
 
-# Start the server in the dbs directory
-CMD ["/bin/bash", "-c", "cd /dbs;/opt/perforce/perforce.sh"]
+# Start the server
+CMD /opt/perforce/perforce.sh
