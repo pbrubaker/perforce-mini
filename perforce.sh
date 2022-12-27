@@ -26,7 +26,7 @@ if [ ! -f /etc/perforce/p4dctl.conf.d/perforce.conf ]; then
         UNICODE_OPTION+="--unicode"
     fi
 
-    /opt/perforce/sbin/configure-helix-p4d.sh $SERVER_ID -n -p $CASE_OPTION $UNICODE_OPTION ssl:$P4PORT -r $P4ROOT -u $MASTER_USER -P $MASTER_PASSWORD
+    /opt/perforce/sbin/configure-helix-p4d.sh $SERVER_ID -n $CASE_OPTION $UNICODE_OPTION -p ssl:$P4PORT -r $P4ROOT -u $MASTER_USER -P $MASTER_PASSWORD
 fi
 
 # if there are no SSL certificates, generate them
@@ -38,6 +38,5 @@ fi
 
 chown -R perforce:perforce $P4ROOT
 chown -R perforce:perforce /dbs
-cd /dbs
-p4dctl start $SERVER_ID 
+p4dctl start $SERVER_ID
 tail -F $P4ROOT/logs/log
