@@ -15,7 +15,7 @@ version: '3'
 services:
   perforce:
     # The image to use.
-    image: derkork/perforce-mini:latest
+    image: brubakerp/perforce-mini:latest
     restart: unless-stopped
     volumes:
       # This is where the configuration is stored. Create an empty folder and mount this.
