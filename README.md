@@ -50,9 +50,9 @@ services:
       - PERFORCE_UID=1000
       - PERFORCE_GID=1000
       # Enable Unicode support on the server.  Set to '1' or 'true' to enable.
-      - $UNICODE=false
+      - UNICODE=false
       # Enable case insensitivity support on the server.  Set to '1' or 'true' to enable.
-      - $CASE_INSENSITIVE=true
+      - CASE_INSENSITIVE=true
     ports:
       # The port to expose. Make sure it matches the P4PORT environment variable.
       - 1666:1666
